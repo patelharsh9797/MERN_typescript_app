@@ -1,14 +1,19 @@
+import notes from "@/routes/notes/notes.index";
+import index from "@/routes/index.route";
 import express from "express";
-import { NoteModel } from "@/db/models";
 import errorMiddleware from "./middlewares/error.middleware";
+import morgan from "morgan";
 
 const app = express();
 app.use(express.json());
+app.use(morgan("dev"));
 
-app.get("/", async (_, res) => {
-  const notes = await NoteModel.find().exec();
-  res.status(200).json({ notes });
-});
+const routes = [
+  { path: "/", router: index },
+  { path: "/api/notes", router: notes },
+];
+
+routes.forEach(({ path, router }) => app.use(path, router));
 
 app.use(() => {
   throw new Error("Not found");
