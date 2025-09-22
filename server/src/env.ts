@@ -4,7 +4,7 @@ import { z } from "zod";
 export const env = createEnv({
   server: {
     PORT:z.coerce.number().default(3000),
-    // DATABASE_URL: z.url(),
+    MONGO_URI: z.url(),
   },
  
   runtimeEnv: process.env,
