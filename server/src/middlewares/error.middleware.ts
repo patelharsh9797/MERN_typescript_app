@@ -11,7 +11,7 @@ const errorMiddleware = (
     let error: any = { ...err };
     error.message = err.message;
 
-    console.error(err);
+    // if (env.NODE_ENV === "development") console.error(err);
 
     // Mongoose bad ObjectId
     if (err.name === "CastError") {
@@ -40,6 +40,7 @@ const errorMiddleware = (
       .status((error as any).statusCode || 500)
       .json({ success: false, error: error.message || "Server Error" });
   } catch (error) {
+    console.error(err);
     next(error);
   }
 };
