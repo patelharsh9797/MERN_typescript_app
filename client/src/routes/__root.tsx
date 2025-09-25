@@ -3,6 +3,17 @@ import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 
 export const Route = createRootRoute({
   component: RootComponent,
+  head: () => ({
+    meta: [
+      {
+        title: "MERN Typescript Notes App",
+      },
+      {
+        name: "description",
+        content: "MERN Typescript Notes App",
+      },
+    ],
+  }),
 });
 
 function RootComponent() {
